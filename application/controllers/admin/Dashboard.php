@@ -1,5 +1,5 @@
 <?php
-class Dashboard extends My_Controller{
+class Dashboard extends MY_Controller{
     function __construct(){
         parent::__construct();
         $this->not_loggedin();

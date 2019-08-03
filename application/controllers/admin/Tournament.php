@@ -1,5 +1,5 @@
 <?php
-class Tournament extends My_Controller{
+class Tournament extends MY_Controller{
     function __construct(){
         parent::__construct();
         $this->not_loggedin();

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pages extends My_Controller {
+class Pages extends MY_Controller {
 	private $userdata = array();
 
 	function __construct(){

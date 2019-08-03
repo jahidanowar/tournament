@@ -1,5 +1,5 @@
 <?php
-class Register extends My_Controller{
+class Register extends MY_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model('Auth_model');

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class My_Controller extends CI_Controller{
+class MY_Controller extends CI_Controller{
 
     function not_loggedin(){
         if(!$this->session->userdata('id')){

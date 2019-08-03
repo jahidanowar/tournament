@@ -1,5 +1,5 @@
 <?php
-class User extends My_Controller{
+class User extends MY_Controller{
     function __construct(){
         parent::__construct();
         $this->not_loggedin();

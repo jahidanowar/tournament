@@ -1,6 +1,6 @@
 <?php
 
-class Logout extends My_Controller{
+class Logout extends MY_Controller{
     function index(){
         $data = $this->session->all_userdata();
 

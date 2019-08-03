@@ -1,6 +1,6 @@
 <?php
 
-class Profile extends My_Controller{
+class Profile extends MY_Controller{
     function __construct(){
         parent::__construct();
         $this->not_loggedin();

@@ -125,7 +125,7 @@ class Entry extends My_Controller{
         $paramList["CHANNEL_ID"] = $CHANNEL_ID;
         $paramList["TXN_AMOUNT"] = $TXN_AMOUNT;
         $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
-        $paramList["CALLBACK_URL"] = "http://localhost/pubg/entry/response";
+        $paramList["CALLBACK_URL"] = base_url()."entry/response";
 
         /*
         $paramList["MSISDN"] = $MSISDN; //Mobile number of customer

@@ -149,7 +149,7 @@
     <!-- Tournament is Cloesd -->
     <div class="container-fluid mt-5 bg-img-1 p-5 text-center">
         <div class="container">
-            <div class="call-to-action">
+            <div class="call-to-action" id="apply">
                 <h2 class="text-light">This Tournament Is Cloesd</h2>
                 <a href="<?= base_url('tournament')?>" class="btn btn-1">Check Other Tournaments</a>
             </div>
@@ -162,7 +162,7 @@
     
 <div class="container-fluid mt-5 bg-img-1 p-5 text-center">
     <div class="container">
-        <div class="call-to-action">
+        <div class="call-to-action" id="apply">
             <h2 class="text-light">Register or Login to Apply</h2>
             <a href="<?= base_url('auth/login?redirect=')?><?= base_url('tournament/'.$tournament_data['slug']) ?>" class="btn btn-1">Login</a>
             <a href="<?= base_url('auth/register?redirect=')?><?= base_url('tournament/'.$tournament_data['slug']) ?>" class="btn btn-1 ml-2">Register</a>

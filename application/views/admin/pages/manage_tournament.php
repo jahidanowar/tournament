@@ -52,9 +52,9 @@
                     <td><?= $row['expiry'] ?></td>
                     <td>
                         <div class="btn-group">
-                            <a href="<?= base_url('admin/tournament/edit/'.$row['id']) ?>" class="btn btn-warning">Edit</a>
-                            <a href="<?= base_url('tournament/'.$row['slug']) ?>" target="_blank" class="btn btn-primary">View</a>
-                            <a href="<?= base_url('admin/tournament/delete/'.$row['id']) ?>" class="btn btn-danger">Del</a>
+                            <a href="<?= base_url('admin/tournament/edit/'.$row['id']) ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="<?= base_url('admin/entry/view/'.$row['id']) ?>" class="btn btn-primary" id="viewEntries" data-tournamentid="<?= $row['id'] ?>"><i class="fas fa-eye"></i></a>
+                            <a href="<?= base_url('admin/tournament/delete/'.$row['id']) ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </td>
                 </tr>
@@ -65,3 +65,4 @@
 
     </div>
 </div>
+

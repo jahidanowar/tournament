@@ -23,11 +23,11 @@ class Entry extends MY_Controller{
             //Check the Tournament Type
             if($tournament_data['type'] == 'individual'){
                 //Individual or Solo Type
-                $squad = "{".$user_data['username']."}";
+                $username = array($user_data['username']);
                 $data = array(
                     'user_id' => $this->session->userdata('id'),
                     'tournament_id' =>  $tournament_data['id'],
-                    'usernames' =>  $squad
+                    'usernames' =>  json_encode($username)
                 );
                 //Insert Entry
                 $result = $this->em->insert($data);
@@ -61,11 +61,13 @@ class Entry extends MY_Controller{
 
                 if($this->form_validation->run()){
                     //Making Usernames in json formatt
-                    $squad = "{".$this->input->post('squad_leader').",".$this->input->post('squad_member_2').",".$this->input->post('squad_member_3').",".$this->input->post('squad_member_4')."}";
+                    $squad = array($this->input->post('squad_leader'),$this->input->post('squad_member_2'),$this->input->post('squad_member_3'),$this->input->post('squad_member_4'));
+                    $usernames = json_encode($squad);
+
                     $data = array(
                         'user_id' => $this->session->userdata('id'),
                         'tournament_id' =>  $tournament_data['id'],
-                        'usernames' =>  $squad
+                        'usernames' =>  $usernames
                     );
                     //Inserting Result
                     $result = $this->em->insert($data);

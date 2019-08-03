@@ -48,8 +48,8 @@
                     <td><?= $row['phone'] ?></td>
                     <td>
                         <div class="btn-group">
-                            <a href="<?= base_url('admin/user/edit/'.$row['id']) ?>" class="btn btn-warning">Edit</a>
-                            <a href="<?= base_url('admin/user/delete/'.$row['id']) ?>" class="btn btn-danger">Del</a>
+                            <a href="<?= base_url('admin/user/edit/'.$row['id']) ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="<?= base_url('admin/user/delete/'.$row['id']) ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </td>
                 </tr>

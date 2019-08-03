@@ -24,7 +24,9 @@
                 <a class="nav-link" href="<?= base_url('auth/register') ?>">Register</a>
             </li>
             <li class="nav-item <?= $page == 'login'? 'active' : '' ?>">
-                <a class="nav-link" href="<?= base_url('auth/login') ?>">Login</a>
+                <a class="nav-link" href="<?= base_url('auth/login?redirect=') ?><?=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 
+                "https" : "http") . "://" . $_SERVER['HTTP_HOST'] .  
+                $_SERVER['REQUEST_URI']?>">Login</a>
             </li>
             <?php endif; ?>
             <?php if($not_loggedin): ?>

@@ -49,6 +49,9 @@
                                         <button type="submit" class="btn btn-1">
                                             Login
                                         </button>
+                                        <br><br>
+                                        <p><a href="#">Forgot Password?</a></p>
+                                        <p>Don't have an Envato Account yet?<a href="<?= base_url('auth/register')?>">Create Account</a></p>
                                     </div>
 
                                 </form>

@@ -259,7 +259,26 @@ a:hover{
     border-radius: 0;
   }
 }
-
+.register{
+  padding-top: 10rem;
+  padding-bottom: 8rem;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
+    url(https://www.pubgmobile.com/en/event/teamDeathmatchMode/images/map3.jpg) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .card {
+    background-color: rgba(0, 0, 0, 0.486);
+    border-radius: 0;
+    border: 2px solid #fff;
+  }
+  .form-control{
+    border-radius: 0;
+    border: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+  }
+}
 
 //Media Quires
 @media (pointer: coarse) and (hover: none) {

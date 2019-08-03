@@ -4,6 +4,9 @@ class Register extends MY_Controller{
         parent::__construct();
         $this->load->model('Auth_model');
         $this->load->library('encryption');
+        if($this->session->userdata('id')){
+            redirect('/user/profile');
+        }
     }
 
     public function index(){

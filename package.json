@@ -1,0 +1,11 @@
+{
+  "name": "gemaenia",
+  "version": "1.0.0",
+  "description": "A PUBG Tournament App",
+  "main": "index.js",
+  "scripts": {
+    "compile-sass": "node-sass assets/scss/app.scss assets/main.css -w"
+  },
+  "author": "Jahid Anowar",
+  "license": "ISC"
+}

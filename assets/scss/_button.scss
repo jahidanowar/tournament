@@ -1,0 +1,26 @@
+.btn{
+    border-radius: 0;
+    text-transform: uppercase;
+    font-family: $font-heading;
+
+    &-1{
+        padding: 0.2rem 2rem;
+        background-color: rgba(0, 0, 0, 0.7);
+        font-size: 1.5rem;
+        color: #fff;
+        border: 1px solid #fff;
+        transition: .5s all;
+
+        &:hover{
+            color:#fff;
+            background-color:rgba(0, 0, 0, 0.9); 
+        }
+    }
+}
+@media (pointer: coarse) and (hover: none) {
+    .btn{
+      &-1{
+        font-size: 1.2rem;
+      }
+    }
+  }

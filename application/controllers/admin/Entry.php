@@ -6,6 +6,7 @@ class Entry extends MY_Controller{
         $this->check_admin();
         $this->load->model('Tournament_model', 'tm');
         $this->load->model('Entry_model', 'em');
+        $this->load->model('Winner_model', 'wm');
     }
 
     function view($id=null){

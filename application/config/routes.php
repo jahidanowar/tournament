@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 //My Routes
 $route['tournament'] = 'pages/tournament';
 $route['tournament/(:any)'] = 'pages/tournament/$1';
+$route['admin'] = 'admin/dashboard';

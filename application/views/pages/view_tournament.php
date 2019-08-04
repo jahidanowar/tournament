@@ -8,7 +8,11 @@
             <p class="mb-4 hero--description page">
                 
             </p>
+            <?php if(!empty($winning_data)){ ?>
+                <a href="#apply" class="btn btn-1">Check Winners</a>
+            <?php }else{?>
             <a href="#apply" class="btn btn-1">Apply Now</a>
+            <?php }?>
         </div>
         </div>
     </div>
@@ -94,58 +98,61 @@
 <?php if($not_loggedin && isset($userdata)){ ?>
     <!-- Check The Tournament Expiry -->
     <?php if($expiry != "expired" && count($entry_data)<$tournament_data['maximum_entries']){ ?>
-<div class="container-fluid mt-5 bg-img-1 p-5">
-    <div class="container">
-        <div class="application text-light" id="apply">
-            <h2>Applay Now</h2>
-                <?php if($this->session->flashdata('error')): ?>
-                    <div class="alert alert-danger">
-                        <?= $this->session->flashdata('error'); ?>
-                    </div>
-                <?php endif; ?>
-                <?php if($this->session->flashdata('success')): ?>
-                    <div class="alert alert-success">
-                        <?= $this->session->flashdata('success'); ?>
-                    </div>
-                <?php endif; ?>
-            <?php if($tournament_data['type'] != 'squad'){ ?>
-                <form action="<?= base_url('entry/make') ?>" method="POST">
-                    <input type="hidden" name="user_id" value="<?= $userdata['id'] ?>">
-                    <input type="hidden" name="tournament_id" value="<?= $tournament_data['id'] ?>">
-                    <h4>Entry Fee  &#8377; <?= $tournament_data['entry_fee'] ?></h4>
-                    <button class="btn btn-1">Apply & Proceed</button>
-                </form>
-            <?php }else{ ?>
-                <form action="<?= base_url('entry/make') ?>" method="POST">
-                    <h5>Squad Infromation</h5>
-                    <hr>
-                    <div class="form-group">
-                        <label for="squad_member_2">Squad Leader</label>
-                        <input type="text" name="squad_leader" id="squad_leader" class="form-control" value="<?= $userdata['username'] ?>" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="squad_leader">Squad Member #2</label>
-                        <input type="text" name="squad_member_2" id="squad_member_2" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="squad_member_3">Squad Member #2</label>
-                        <input type="text" name="squad_member_3" id="squad_member_3" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="squad_member_4">Squad Member #3</label>
-                        <input type="text" name="squad_member_4" id="squad_member_4" class="form-control">
-                    </div>
-                    <input type="hidden" name="user_id" value="<?= $userdata['id'] ?>">
-                    <input type="hidden" name="tournament_id" value="<?= $tournament_data['id'] ?>">
-                    <h4>Entry Fee  &#8377; <?= $tournament_data['entry_fee'] ?></h4>
-                    <button class="btn btn-1">Apply & Proceed</button>
-                </form>
-            <?php }  ?>
+        <!-- Checking Winner Announcment -->
+        <?php if(empty($winning_data)): ?>
+        <div class="container-fluid mt-5 bg-img-1 p-5">
+            <div class="container">
+                <div class="application text-light" id="apply">
+                    <h2>Applay Now</h2>
+                        <?php if($this->session->flashdata('error')): ?>
+                            <div class="alert alert-danger">
+                                <?= $this->session->flashdata('error'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($this->session->flashdata('success')): ?>
+                            <div class="alert alert-success">
+                                <?= $this->session->flashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php if($tournament_data['type'] != 'squad'){ ?>
+                        <form action="<?= base_url('entry/make') ?>" method="POST">
+                            <input type="hidden" name="user_id" value="<?= $userdata['id'] ?>">
+                            <input type="hidden" name="tournament_id" value="<?= $tournament_data['id'] ?>">
+                            <h4>Entry Fee  &#8377; <?= $tournament_data['entry_fee'] ?></h4>
+                            <button class="btn btn-1">Apply & Proceed</button>
+                        </form>
+                    <?php }else{ ?>
+                        <form action="<?= base_url('entry/make') ?>" method="POST">
+                            <h5>Squad Infromation</h5>
+                            <hr>
+                            <div class="form-group">
+                                <label for="squad_member_2">Squad Leader</label>
+                                <input type="text" name="squad_leader" id="squad_leader" class="form-control" value="<?= $userdata['username'] ?>" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="squad_leader">Squad Member #2</label>
+                                <input type="text" name="squad_member_2" id="squad_member_2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="squad_member_3">Squad Member #2</label>
+                                <input type="text" name="squad_member_3" id="squad_member_3" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="squad_member_4">Squad Member #3</label>
+                                <input type="text" name="squad_member_4" id="squad_member_4" class="form-control">
+                            </div>
+                            <input type="hidden" name="user_id" value="<?= $userdata['id'] ?>">
+                            <input type="hidden" name="tournament_id" value="<?= $tournament_data['id'] ?>">
+                            <h4>Entry Fee  &#8377; <?= $tournament_data['entry_fee'] ?></h4>
+                            <button class="btn btn-1">Apply & Proceed</button>
+                        </form>
+                    <?php }  ?>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+        <?php endif; ?>
     <?php }else{ ?>
-
+    <?php if(empty($winning_data)){ ?>
     <!-- Tournament is Cloesd -->
     <div class="container-fluid mt-5 bg-img-1 p-5 text-center">
         <div class="container">
@@ -155,6 +162,31 @@
             </div>
         </div>
     </div>
+    <?php } else{?>
+    <div class="container-fluid mt-5 bg-img-1 p-5 text-center">
+            <div class="container">
+                <div class="call-to-action" id="apply">
+                    <h2 class="text-light">Winners</h2>
+                    <table class="table text-light mx-auto" style="width:50%">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>User</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($winning_data as $wd){ ?>
+                            <tr>
+                                <td><?= $wd['rank']; ?></td>
+                                <td><?php foreach(json_decode($wd['users']) as $winner){echo "<span class='badge badge-light'>".$winner,"</span> "; } ?></td>
+                            </tr>
+                            <?php  }?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <?php }?>
 
     <?php } ?>
 

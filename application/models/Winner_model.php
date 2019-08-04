@@ -38,5 +38,12 @@ class Winner_model extends CI_Model{
             return $query->result_array();
         }
     }
+    function get_by_tournament($id=null){
+        if($id != null){
+            $this->db->where('tournament_id', $id);
+            $query = $this->db->get('winners');
+            return $query->result_array();
+        }
+    }
     
 }

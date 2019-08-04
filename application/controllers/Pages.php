@@ -9,6 +9,7 @@ class Pages extends MY_Controller {
 		// $this->not_loggedin();
 		$this->load->model('tournament_model', 'tm');
 		$this->load->model('User_model');
+		$this->load->model('Winner_model', 'wm');
 		
 	}
 
@@ -37,6 +38,7 @@ class Pages extends MY_Controller {
 					'event_expiry' => $this->check_expiry_time($result['event_time']), //Check Event Date and Time
 					'tournament_data'	=>	$result,
 					'winning_prize'		=>	$this->tm->get_winning_prize($result['winning_prize_id']),
+					'winning_data'		=>	$this->wm->get_by_tournament($result['id']),
 					'not_loggedin'	=>	$this->session->userdata('id'),
 					'userdata'		=>	$userdata,
 					'entry_data'	=>	$this->em->get_by_tournament($result['id'])
@@ -58,6 +60,7 @@ class Pages extends MY_Controller {
 				foreach($result as $key => $value){
 					$new_data[$key] = $value;
 					$new_data[$key]['winning_prize'] =  $this->tm->get_winning_prize($value['winning_prize_id']);
+					$new_data[$key]['winning_data'] = $this->wm->get_by_tournament($value['id']);
 				}
 				$data = array(
 					'page'	=>	'tournaments',

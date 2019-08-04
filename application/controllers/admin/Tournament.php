@@ -8,6 +8,7 @@ class Tournament extends MY_Controller{
     }
 
     public function index(){
+        
         $data =  array(
             'page'  =>  'pages/manage_tournament',
             'title' =>  'Manage Tournament',

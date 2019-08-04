@@ -6,7 +6,12 @@ class Entry_model extends CI_Model{
         $this->db->insert('entries',$data);
         return $this->db->insert_id();
     }
-
+    function get($id){
+        $this->db->where('id', $id);
+        $this->db->where('transaction_status', 1);
+        $query = $this->db->get('entries');
+        return $query->row_array();
+    }
     function get_by_user($id){
         $this->db->where('user_id', $id);
         $this->db->where('transaction_status', 1);

@@ -37,6 +37,9 @@ class Winner_model extends CI_Model{
             $query = $this->db->get('winners');
             return $query->result_array();
         }
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get('winners');
+        return $query->result_array();
     }
     function get_by_tournament($id=null){
         if($id != null){

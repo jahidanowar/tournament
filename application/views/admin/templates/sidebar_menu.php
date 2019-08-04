@@ -2,11 +2,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url('dashboard'); ?>">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url('/admin/dashboard'); ?>">
   <div class="sidebar-brand-icon">
     <img src="<?php echo site_url('/assets/admin/img/logo.png'); ?>" alt="FoxFlue">
   </div>
-  <div class="sidebar-brand-text mx-3">FoxPMS <sup>BETA</sup></div>
+  <div class="sidebar-brand-text mx-3">GEMARS <sup>BETA</sup></div>
 </a>
 
 <!-- Divider -->
@@ -22,7 +22,7 @@
 ?>
 <!-- Nav Item - Dashboard -->
 <li class="nav-item <?php active_menu('dashboard'); ?> ">
-  <a class="nav-link" href="<?php echo site_url('dashboard'); ?>">
+  <a class="nav-link" href="<?php echo site_url('/admin/dashboard'); ?>">
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>Dashboard</span></a>
 </li>
@@ -33,7 +33,7 @@
 
 <li class="nav-item  <?php active_menu('Tournament'); ?>">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvoice" aria-expanded="true" aria-controls="collapseInvoice">
-  <i class="fas fa-file-invoice-dollar"></i>
+  <i class="fas fa-running"></i>
     <span>Tournament</span>
   </a>
   <div id="collapseInvoice" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -42,6 +42,13 @@
       <a class="collapse-item" href="<?php echo site_url('admin/tournament'); ?>">Manage Tournament</a>
     </div>
   </div>
+</li>
+
+<li class="nav-item  <?php active_menu('winners'); ?>">
+  <a class="nav-link collapsed" href="<?php echo site_url('admin/winners'); ?>">
+  <i class="fas fa-crown"></i>
+    <span>Winniers</span>
+  </a>
 </li>
 
 <li class="nav-item <?php active_menu('user'); ?>">

@@ -42,4 +42,13 @@ class Entry_model extends CI_Model{
         $this->db->where('id', $id);
         return $this->db->delete('entries');
     }
+
+    function select_winner($id,$winners_no){
+        $this->db->where('tournament_id', $id);
+        // $this->db->select_max('points');
+        $this->db->order_by('points', 'DESC');
+        $this->db->limit($winners_no);
+        $query = $this->db->get('entries');
+        return $query->result_array();
+    }
 }

@@ -10,7 +10,8 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Manage
         <span class="pull-right">
-            <a href="<?php echo site_url('admin/tournament'); ?>" class="badge badge-danger">Tournament <i class="fas fa-plus"></i></a>
+            <a href="<?php echo site_url('admin/tournament'); ?>" class="badge badge-danger">Tournament</i></a>
+            <button class="btn btn-primary text-right" data-tournamentid="<?= $tournament_data['id']?>" id="makeWinner">Generate Winners</button>
         </span>
         </h6>
     </div>
@@ -121,6 +122,27 @@ $(document).ready( function () {
             })
         })
     });
+
+    //Generate Winner
+    $(document).on('click', '#makeWinner',function(e){
+        e.preventDefault();
+        var tournamentId = $(this).data('tournamentid');
+        $.ajax({
+            url:"<?= base_url('admin/entry/select_winner') ?>",
+            method:"POST",
+            data:{id:tournamentId},
+            dataType:"JSON",
+            success:function(resp){
+                if(resp.status == 'success'){
+                    manageTable.ajax.reload();
+                    notifyFunc(resp.message,'success');
+                }
+                else{
+                    notifyFunc(resp.message,'danger');
+                }
+            }
+        })
+    })
 });
 
 </script>

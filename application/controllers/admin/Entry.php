@@ -45,14 +45,14 @@ class Entry extends MY_Controller{
             foreach($data['entries'] as $k => $v){
 
                 $result['data'][$k] = array(
-                    $v['id'],
+                    $this->wm->get($v['id']) == TRUE ? $v['id']." <i class='fas fa-crown'></i>": $v['id'],
                     "<a href='".base_url('admin/user/view/'.$v['user_id'])."' class='btn btn-sm btn-info'  >View Leader</a>",
                     2 => '',
                     $v['transaction_id'],
                     $v['created_at'],
                     $v['points'] == 0 ? "
                     <a href='#' id='addPoint' class='btn btn-primary' data-entryid='".$v['id']."' data-userid='".$v['user_id']."' data-tournamentid='".$v['tournament_id']."'>Add Point</a>
-                    " : $v['points']
+                    " : $v['points'] ." <a href='#' id='addPoint' class='badge badge-warning' data-entryid='".$v['id']."' data-userid='".$v['user_id']."' data-tournamentid='".$v['tournament_id']."'>Update Point</a>"
                 );
 
                 $u_names = array();
@@ -108,5 +108,35 @@ class Entry extends MY_Controller{
         }
 
         echo json_encode($result);
+    }
+
+    function select_winner(){
+        $result = array();
+        $id = $this->input->post('id');
+        if(!empty($id)){
+            $entries_data = $this->em->select_winner($id,3);
+
+            $i = 0;
+            foreach($entries_data as $entry_data){
+                $data = array(
+                    'entry_id'=>$entry_data['id'],
+                    'tournament_id'=>$entry_data['tournament_id'],
+                    'rank'=> ++$i,
+                    'users'=>$entry_data['usernames']
+                );
+
+                if($this->wm->check_entry_id($entry_data['id']) == TRUE && $this->wm->check_tournament_id($entry_data['tournament_id']) == TRUE){
+                    $this->wm->insert($data);
+                    $result['status'] = 'success';
+                    $result['message'] = "Winners has been Generated";
+                }
+                else{
+                    $result['status'] = 'error';
+                    $result['message'] = "Winners Already Generated";
+                }
+            }
+            echo json_encode($result);
+
+        }
     }
 }

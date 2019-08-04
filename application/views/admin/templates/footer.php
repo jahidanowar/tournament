@@ -40,6 +40,7 @@
 
 <!-- Custom -->
 <script type="text/javascript">
+
 $('.datepicker').datetimepicker({
     format: 'yyyy-mm-dd',
     weekStart: 1,

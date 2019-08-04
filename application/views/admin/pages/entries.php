@@ -1,3 +1,8 @@
+<!-- Custom styles for this page -->
+<link href="<?php echo base_url(); ?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/admin/vendor/bs-date-picker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+
 <h1 class="h3 mb-2 text-gray-800"><?= $title ?> for <u><?= $tournament_data['title']?></u></h1>
 <p class="mb-4"></p>
 
@@ -25,7 +30,7 @@
     <?php endif; ?>
 
     <div class="col-md-12">
-        <table class="table">
+        <table class="table" id="dataTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -36,7 +41,7 @@
                     <th>Select Winner</th>
                 </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
                 <?php foreach($entries as $row){ ?>
                 <tr>
                     <td><?= $row['id'] ?></td>
@@ -44,10 +49,13 @@
                     <td><?php foreach(json_decode($row['usernames']) as $username){echo "<span class='badge badge-primary'>".$username."</span> ";} ?></td>
                     <td><?= $row['transaction_id'] ?></td>
                     <td><?= $row['created_at'] ?></td>
-                    <td><a href="#" id="selectWinner" class="btn btn-primary" data-entryid="<?= $row['id'] ?>" data-userid="<?= $row['user_id'] ?>" data-tournamentid="<?= $row['tournament_id'] ?>">Select as Winner</a></td>
+                    <td>
+                    <?php if($row['points']>0){ echo $row['points']; }else{ ?>
+                        <a href="#" id="addPoint" class="btn btn-primary" data-entryid="<?= $row['id'] ?>" data-userid="<?= $row['user_id'] ?>" data-tournamentid="<?= $row['tournament_id'] ?>">Add Point</a>
+                    <?php } ?></td>
                 </tr>
                 <?php } ?>
-            </tbody>
+            </tbody> -->
         </table>
     </div>
 
@@ -62,58 +70,67 @@
             <div class="modal-body">
                 <form action="" method="post" id="winnerForm">
                     <div class="form-group">
-                        <label for="rank">Rank</label>
-                        <select name="rank" id="rank" class="form-control">
-                            <option value="">--Select--</option>
-                            <option value="1">1st</option>
-                            <option value="2">2nd</option>
-                            <option value="3">3rd</option>
-                        </select>
+                        <label for="rank">Point</label>
+                        <input type="number" name="points" id="points" class="form-control">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Add</button>
                     </div>
+                    <div id="errorMessage" class="text-danger"></div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
+
 <script>
-    $(document).on('click', '#selectWinner', function(e){
+$(document).ready( function () {
+
+    var manageTable = $('#dataTable').DataTable({
+        "ajax": "http://localhost/pubg/admin/entry/get/?id=<?php echo $row['tournament_id']; ?>",   
+    });
+        $(document).on('click', '#addPoint', function(e){
         e.preventDefault();
         var entryId = $(this).data('entryid');
         var userId = $(this).data('userid');
         var tournamentId = $(this).data('tournamentid');
-
         $("#winnerModal").modal("show");
-        $(document).on('submit', '#winnerForm', function(e){
+        $(document).on('submit', '#winnerForm',function(e){
             e.preventDefault();
-            var rank = $("#rank").val();
-
+            var point = $("#points").val();
+            console.log(point);
             console.log(entryId);
-            console.log(userId);
-            console.log(tournamentId);
-            console.log(rank);
-
             $.ajax({
-                url:'<?= site_url('admin/entry/winner_check'); ?>',
-                type:'POST',
-                data:{entry_id:entryId,tournament_id:tournamentId,rank:rank},
-                dataType:'JSON',
-                success: function(resp){
-                    console.log(resp);
-                    // if(resp.status == true){
-                    //     console.log(resp);
-                    // // notifyFunc(resp.id,'success');
-                    // }
-                    // else{
-                    // notifyFunc(resp.id,'danger');
-                    // } 
+                url:'<?= base_url('admin/entry/update') ?>',
+                type: 'POST',
+                data: {entry_id:entryId, point:point},
+                dataType: 'JSON',
+                success: function(response){
+                    if(response.status == 'success'){
+                        $("#winnerForm").trigger("reset");
+                        $("#winnerModal").modal("hide");
+                        manageTable.ajax.reload();
+                        notifyFunc('Points Added','success');
+                    }
+                    else{
+                        notifyFunc(response.message,'danger');
+                    }
+                    
                 }
             })
-
         })
-        
-    })
+    });
+});
+
 </script>
+
+<!-- Page level plugins -->
+<script src="<?php echo base_url(); ?>assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+<script src="<?php echo base_url(); ?>assets/admin/js/demo/datatables-demo.js"></script>
+<!-- Bootstrap Data picker -->
+<script src="<?php echo base_url(); ?>assets/admin/vendor/bs-date-picker/js/bootstrap-datepicker.min.js"></script>
+

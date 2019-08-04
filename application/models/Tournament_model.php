@@ -5,20 +5,28 @@ class Tournament_model extends CI_Model{
         // return $this->db->insert_id();
     }
 
-    function get($id=NULL){
+    function get($id=NULL,$active=NULL){
 
         if($id != NULL){
             $this->db->where('id', $id);
+            if($active == TRUE){
+                $this->db->where('status', 'active');  
+            }  
             $query = $this->db->get('tournament');
             return $query->row_array();
         }
-        
+        if($active == TRUE){
+            $this->db->where('status', 'active');  
+        }      
         $query = $this->db->get('tournament');
         return $query->result_array();
     }
 
-    function get_by_slug($slug){
+    function get_by_slug($slug,$active=null){
         $this->db->where('slug', $slug);
+        if($active == TRUE){
+            $this->db->where('status', 'active');  
+        } 
         $query = $this->db->get('tournament');
         return $query->row_array();
     }

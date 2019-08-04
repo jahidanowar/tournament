@@ -27,7 +27,7 @@ class Pages extends MY_Controller {
 		$this->load->model('Entry_model', 'em');
 		if($slug){
 
-			$result = $this->tm->get_by_slug($slug);
+			$result = $this->tm->get_by_slug($slug,TRUE);
 			$userdata = $this->User_model->get($this->session->userdata('id'));
 			if($result){
 
@@ -52,9 +52,7 @@ class Pages extends MY_Controller {
 		}
 		else{
 
-			$result = $this->tm->get();
-
-			if($result){
+			$result = $this->tm->get(NULL,TRUE);
 				$new_data = array();
 				//Rebind Array with New Data
 				foreach($result as $key => $value){
@@ -69,7 +67,6 @@ class Pages extends MY_Controller {
 					'not_loggedin'	=>	$this->session->userdata('id')
 				);
 				$this->render_page($data);
-			}
 		}
 	}
 

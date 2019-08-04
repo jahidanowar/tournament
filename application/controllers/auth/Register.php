@@ -10,10 +10,17 @@ class Register extends MY_Controller{
     }
 
     public function index(){
+        $redirect = '';
+
+        if($this->input->get('redirect')){
+            $redirect = $this->input->get('redirect');
+        }
+        
         $data = array(
             'page'      =>  'register',
             'title'     =>  'Register',
-            'not_loggedin' => $this->session->userdata('id')
+            'not_loggedin' => $this->session->userdata('id'),
+            'redirect'     => $redirect
         );
         $this->render_page($data);
     }
@@ -47,7 +54,12 @@ class Register extends MY_Controller{
 
             if($id>0){
                 $this->session->set_flashdata('success', 'You have successfully registered. You can Login Now');
-                redirect('auth/login');
+                if($this->input->post('redirect')){
+                    redirect('auth/login?redirect='.$this->input->post('redirect'));
+                }
+                else{
+                    redirect('auth/login');
+                }
             }
         }
         else{

@@ -7,7 +7,7 @@ class Login extends MY_Controller{
         $this->load->model('Auth_model');
         $this->load->library('encryption');
         if($this->session->userdata('id')){
-            redirect('/');
+            redirect('tournament');
         }
     }
 

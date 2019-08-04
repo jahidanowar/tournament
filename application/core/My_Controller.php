@@ -21,7 +21,7 @@ class MY_Controller extends CI_Controller{
 
     public function render_page($data=null){
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header',$data);
 		$this->load->view('templates/navbar',$data);
 		$this->load->view('pages/'.$data['page']);
         $this->load->view('templates/footer');
